@@ -20,29 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
 
     func tap(_ sender: UITapGestureRecognizer) {
         if sender.state == .began, let vc = AppDelegate.topViewController() as? EditorController {
-            AppDelegate.screenshot(view: vc.view)
+            vc.view.screenshot()
         }
-    }
-
-    @discardableResult
-    class func screenshot(view: UIView) -> Bool {
-
-        func screenshot(view: UIView) -> UIImage? {
-            UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0);
-            //        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-            //        view.layer.render(in: context)
-            view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return image
-        }
-
-        let filename = "\(UUID().uuidString).png"
-        print("take screenshot: \(filename)")
-        guard let screenshot = screenshot(view: view) else { return false }
-        let url = URL(fileURLWithPath: "\(FileManager.default.applicationDocumentsDirectory)/\(filename)")
-        let res = try? UIImagePNGRepresentation(screenshot)?.write(to: url)
-        return res == nil ? false : true
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

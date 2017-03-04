@@ -11,7 +11,7 @@ import UIKit
 
 class EditorController: UIViewController {
 
-    var file: URL!
+    var url: URL!
     var isModified = false {
         didSet {
             self.navigationItem.rightBarButtonItem?.isEnabled = isModified
@@ -20,7 +20,7 @@ class EditorController: UIViewController {
 
     convenience init(url: URL) {
         self.init()
-        self.file = url
+        self.url = url
     }
 
     deinit {
@@ -34,10 +34,10 @@ class EditorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let string = try? String(contentsOfFile: self.file.path, encoding: .utf8) {
+        if let string = try? String(contentsOfFile: self.url.path, encoding: .utf8) {
             (self.view as! UITextView).text = string
         }
-        self.navigationItem.title = (self.file.path as NSString).lastPathComponent
+        self.navigationItem.title = (self.url.path as NSString).lastPathComponent
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(EditorController.onSave(_:)))
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
@@ -65,7 +65,7 @@ class EditorController: UIViewController {
 
     func onSave(_ sender: UIBarButtonItem) {
         if self.isModified {
-            try? (self.view as! UITextView).text.write(to: self.file, atomically: true, encoding: .utf8)
+            try? (self.view as! UITextView).text.write(to: self.url, atomically: true, encoding: .utf8)
             self.isModified = false
             self.view.resignFirstResponder()
         }

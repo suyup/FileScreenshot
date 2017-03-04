@@ -40,7 +40,7 @@ class PreviewController: QLPreviewController, UIGestureRecognizerDelegate {
     }
 
     func tap(_ sender: UIBarButtonItem) {
-        AppDelegate.screenshot(view: self.view)
+        self.view.screenshot()
     }
 
     override func encodeRestorableState(with coder: NSCoder) {

@@ -33,7 +33,7 @@ class TableViewController: UITableViewController {
             fatalError("cannot initiate directory watcher")
         }
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(TableViewController.addPushed(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(TableViewController.addPressed(_:)))
     }
 
     // Mark:
@@ -92,7 +92,7 @@ class TableViewController: UITableViewController {
         if uti == kUTTypePlainText as String {
             controller = EditorController(url: url)
         } else {
-            controller = PreviewController(url: url)
+            controller = WebViewController(url: url)
         }
 
         self.navigationController?.pushViewController(controller, animated: true)
@@ -140,7 +140,7 @@ class TableViewController: UITableViewController {
         }
     }
 
-    func addPushed(_ sender: UIBarButtonItem) {
+    func addPressed(_ sender: UIBarButtonItem) {
         self.present(self.addFileAlertController, animated: true, completion: nil)
     }
 

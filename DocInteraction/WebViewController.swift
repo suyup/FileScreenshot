@@ -29,6 +29,6 @@ class WebViewController: UIViewController {
     }
 
     func onClick(_ sender: UIBarButtonItem) {
-        AppDelegate.screenshot(view: self.view)
+        self.view.screenshot()
     }
 }
