@@ -9,7 +9,7 @@
 import Foundation
 import QuickLook
 
-class PreviewController: QLPreviewController, UIGestureRecognizerDelegate {
+class PreviewController: QLPreviewController {
 
     var url: URL!
 
@@ -37,10 +37,16 @@ class PreviewController: QLPreviewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationItem.rightBarButtonItem?.action = #selector(PreviewController.tap(_:))
+        self.screenshotTrigger.delegate = self
+        self.view.addGestureRecognizer(self.screenshotTrigger)
     }
 
-    func tap(_ sender: UIBarButtonItem) {
+    func tap(_ sender: AnyObject) {
         self.view.screenshot()
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 
     override func encodeRestorableState(with coder: NSCoder) {

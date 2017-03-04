@@ -10,27 +10,14 @@ import UIKit
 import QuartzCore
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, Screenshotable {
 
     var window: UIWindow?
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-
-    func tap(_ sender: UITapGestureRecognizer) {
-        if sender.state == .began, let vc = AppDelegate.topViewController() as? EditorController {
-            vc.view.screenshot()
-        }
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(AppDelegate.tap(_:)))
-        gesture.numberOfTouchesRequired = 3
-        gesture.cancelsTouchesInView = false
-        gesture.delegate = self
-        self.window?.addGestureRecognizer(gesture)
-        self.window?.isUserInteractionEnabled = true
+        let screenshotTrigger = self.screenshotTrigger(action: #selector(AppDelegate.fire(_:)))
+        screenshotTrigger.delegate = self
+        self.window?.addGestureRecognizer(screenshotTrigger)
         return true
     }
 
@@ -39,6 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
         switch name {
         case "Preview": return PreviewController()
         default: return nil
+        }
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+
+    func fire(_ sender: UIGestureRecognizer) {
+        if sender.state == .began, let vc = AppDelegate.topViewController() as? EditorController {
+            vc.view.screenshot()
         }
     }
 

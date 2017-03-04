@@ -22,6 +22,7 @@
 		754A82C51E69C4CA000C39DB /* Text Document.txt in Resources */ = {isa = PBXBuildFile; fileRef = 754A82C11E69C4CA000C39DB /* Text Document.txt */; };
 		754A82C71E69C6A4000C39DB /* DirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754A82C61E69C6A4000C39DB /* DirectoryWatcher.swift */; };
 		754A82D71E69E505000C39DB /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754A82D61E69E505000C39DB /* PreviewController.swift */; };
+		758F37EE1E6A9ABD00D40C46 /* Screenshotable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758F37ED1E6A9ABD00D40C46 /* Screenshotable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		754A82C11E69C4CA000C39DB /* Text Document.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text Document.txt"; sourceTree = "<group>"; };
 		754A82C61E69C6A4000C39DB /* DirectoryWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryWatcher.swift; sourceTree = "<group>"; };
 		754A82D61E69E505000C39DB /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		758F37ED1E6A9ABD00D40C46 /* Screenshotable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screenshotable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				754A82AB1E69C430000C39DB /* AppDelegate.swift */,
+				758F37ED1E6A9ABD00D40C46 /* Screenshotable.swift */,
 				754A82AD1E69C430000C39DB /* TableViewController.swift */,
 				754A82D61E69E505000C39DB /* PreviewController.swift */,
 				7511D8301E6A29B000480D7B /* EditorController.swift */,
@@ -184,6 +187,7 @@
 				754A82AE1E69C430000C39DB /* TableViewController.swift in Sources */,
 				7511D8311E6A29B000480D7B /* EditorController.swift in Sources */,
 				7511D8451E6A82BC00480D7B /* UIView+Screenshot.swift in Sources */,
+				758F37EE1E6A9ABD00D40C46 /* Screenshotable.swift in Sources */,
 				7511D8431E6A78E700480D7B /* WebViewController.swift in Sources */,
 				754A82AC1E69C430000C39DB /* AppDelegate.swift in Sources */,
 				754A82C71E69C6A4000C39DB /* DirectoryWatcher.swift in Sources */,
