@@ -81,7 +81,7 @@ class Snapshot {
         if FileManager.default.fileExists(atPath: path) {
             let destination = URL(fileURLWithPath: "\(path)/\(UUID().uuidString).png")
             if let _ = try? FileManager.default.copyItem(at: url!, to: destination),
-                let outurl = URL(string: "awwb://snapshot?path=\(destination.path)"),
+                let outurl = URL(string: "awwb://snapshot?sharedpath=\(destination.path)"),
                 UIApplication.shared.canOpenURL(outurl) {
                 UIApplication.shared.open(outurl, options: [:]) { success in
                     print("open \(outurl) success: \(success)")
@@ -94,7 +94,7 @@ class Snapshot {
 
     private func sendTo(docInteration dic: UIDocumentInteractionController) -> Bool {
         guard let view = view else { return false }
-        dic.uti = "org.x.whiteboard"
+        dic.uti = "org.x.splab.snapshot"
         return dic.presentOpenInMenu(from: view.frame, in: view, animated: true)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  UIViewController.swift
+//  UIViewController+Snapshot.swift
 //  DocInteraction
 //
 //  Created by span on 3/4/17.
@@ -10,27 +10,24 @@ import UIKit
 
 protocol Snapshotable: UIGestureRecognizerDelegate {
 
-    func snapshotTrigger(action: Selector) -> UIGestureRecognizer
+    var snapshotTrigger: UIGestureRecognizer { get }
 
     func fireSnapshot(_ sender: UIGestureRecognizer)
 }
 
 extension UIViewController: Snapshotable {
 
-    func snapshotTrigger(action: Selector) -> UIGestureRecognizer {
-        let press = UILongPressGestureRecognizer(target: self, action: action)
+    var snapshotTrigger: UIGestureRecognizer {
+        let press = UILongPressGestureRecognizer(target: self,
+                                                 action: #selector(UIViewController.fireSnapshot(_:)))
         press.numberOfTouchesRequired = 3
         press.cancelsTouchesInView = false
         return press
     }
 
-    var snapshotTrigger: UIGestureRecognizer {
-        return self.snapshotTrigger(action: #selector(UIViewController.fireSnapshot(_:)))
-    }
-
     func fireSnapshot(_ sender: UIGestureRecognizer) {
         if sender.state == .began, let view = sender.view {
-            let _ = Snapshot(on: view, strategy: SendStrategy.docInteratcion)
+            let _ = Snapshot(on: view)
         }
     }
 

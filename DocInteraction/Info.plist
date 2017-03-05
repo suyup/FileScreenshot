@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>awwb</string>
-    </array>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -217,20 +213,6 @@
 			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
-			<key>CFBundleTypeName</key>
-			<string>AirWatch</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.air-watch.awsec</string>
-			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeName</key>
 			<string>ZIP</string>
 			<key>CFBundleTypeRole</key>
@@ -258,6 +240,10 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>awwb</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

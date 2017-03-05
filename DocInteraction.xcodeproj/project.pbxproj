@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7501E4F81E6CA6ED0075079D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501E4F71E6CA6ED0075079D /* Bundle.swift */; };
 		7511D8311E6A29B000480D7B /* EditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511D8301E6A29B000480D7B /* EditorController.swift */; };
 		7511D8411E6A4ED600480D7B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511D8401E6A4ED600480D7B /* FileManager.swift */; };
 		7511D8431E6A78E700480D7B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511D8421E6A78E700480D7B /* WebViewController.swift */; };
@@ -22,11 +23,12 @@
 		754A82C51E69C4CA000C39DB /* Text Document.txt in Resources */ = {isa = PBXBuildFile; fileRef = 754A82C11E69C4CA000C39DB /* Text Document.txt */; };
 		754A82C71E69C6A4000C39DB /* DirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754A82C61E69C6A4000C39DB /* DirectoryWatcher.swift */; };
 		754A82D71E69E505000C39DB /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754A82D61E69E505000C39DB /* PreviewController.swift */; };
-		758F37EE1E6A9ABD00D40C46 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758F37ED1E6A9ABD00D40C46 /* UIViewController.swift */; };
+		758F37EE1E6A9ABD00D40C46 /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758F37ED1E6A9ABD00D40C46 /* UIViewController+Snapshot.swift */; };
 		75AEC93E1E6C94F100EE0541 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEC93D1E6C94F100EE0541 /* Snapshot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7501E4F71E6CA6ED0075079D /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		7511D8301E6A29B000480D7B /* EditorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorController.swift; sourceTree = "<group>"; };
 		7511D8401E6A4ED600480D7B /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		7511D8421E6A78E700480D7B /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -44,8 +46,9 @@
 		754A82C11E69C4CA000C39DB /* Text Document.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text Document.txt"; sourceTree = "<group>"; };
 		754A82C61E69C6A4000C39DB /* DirectoryWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryWatcher.swift; sourceTree = "<group>"; };
 		754A82D61E69E505000C39DB /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
-		758F37ED1E6A9ABD00D40C46 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		758F37ED1E6A9ABD00D40C46 /* UIViewController+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Snapshot.swift"; sourceTree = "<group>"; };
 		75AEC93D1E6C94F100EE0541 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		75AEC93F1E6C9B4A00EE0541 /* DocInteraction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DocInteraction.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,14 +87,11 @@
 				7511D8301E6A29B000480D7B /* EditorController.swift */,
 				7511D8421E6A78E700480D7B /* WebViewController.swift */,
 				75AEC93D1E6C94F100EE0541 /* Snapshot.swift */,
+				758F37ED1E6A9ABD00D40C46 /* UIViewController+Snapshot.swift */,
 				7511D8441E6A82BC00480D7B /* UIView.swift */,
-				758F37ED1E6A9ABD00D40C46 /* UIViewController.swift */,
+				7501E4F71E6CA6ED0075079D /* Bundle.swift */,
 				7511D8401E6A4ED600480D7B /* FileManager.swift */,
 				754A82C61E69C6A4000C39DB /* DirectoryWatcher.swift */,
-				754A82AF1E69C430000C39DB /* Main.storyboard */,
-				754A82B21E69C430000C39DB /* Assets.xcassets */,
-				754A82B41E69C430000C39DB /* LaunchScreen.storyboard */,
-				754A82B71E69C430000C39DB /* Info.plist */,
 				754A82BD1E69C4A7000C39DB /* Resources */,
 			);
 			path = DocInteraction;
@@ -100,6 +100,11 @@
 		754A82BD1E69C4A7000C39DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				75AEC93F1E6C9B4A00EE0541 /* DocInteraction.entitlements */,
+				754A82AF1E69C430000C39DB /* Main.storyboard */,
+				754A82B21E69C430000C39DB /* Assets.xcassets */,
+				754A82B41E69C430000C39DB /* LaunchScreen.storyboard */,
+				754A82B71E69C430000C39DB /* Info.plist */,
 				754A82BE1E69C4CA000C39DB /* HTML Document.html */,
 				754A82BF1E69C4CA000C39DB /* Image Document.jpg */,
 				754A82C01E69C4CA000C39DB /* PDF Document.pdf */,
@@ -142,6 +147,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 8FBZ2LMY23;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -190,9 +200,10 @@
 				754A82AE1E69C430000C39DB /* TableViewController.swift in Sources */,
 				7511D8311E6A29B000480D7B /* EditorController.swift in Sources */,
 				7511D8451E6A82BC00480D7B /* UIView.swift in Sources */,
-				758F37EE1E6A9ABD00D40C46 /* UIViewController.swift in Sources */,
+				758F37EE1E6A9ABD00D40C46 /* UIViewController+Snapshot.swift in Sources */,
 				7511D8431E6A78E700480D7B /* WebViewController.swift in Sources */,
 				754A82AC1E69C430000C39DB /* AppDelegate.swift in Sources */,
+				7501E4F81E6CA6ED0075079D /* Bundle.swift in Sources */,
 				754A82C71E69C6A4000C39DB /* DirectoryWatcher.swift in Sources */,
 				75AEC93E1E6C94F100EE0541 /* Snapshot.swift in Sources */,
 			);
@@ -317,6 +328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DocInteraction/DocInteraction.entitlements;
 				DEVELOPMENT_TEAM = 8FBZ2LMY23;
 				INFOPLIST_FILE = DocInteraction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -330,6 +342,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DocInteraction/DocInteraction.entitlements;
 				DEVELOPMENT_TEAM = 8FBZ2LMY23;
 				INFOPLIST_FILE = DocInteraction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

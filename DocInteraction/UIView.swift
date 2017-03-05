@@ -28,7 +28,7 @@ extension UIView {
     }
 
     func snapshot() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0);
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0)
         self.drawHierarchy(in: self.frame, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

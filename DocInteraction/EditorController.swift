@@ -38,7 +38,8 @@ class EditorController: UIViewController {
             (self.view as! UITextView).text = string
         }
         self.navigationItem.title = (self.url.path as NSString).lastPathComponent
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(EditorController.onSave(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self,
+                                                                 action: #selector(EditorController.onSave(_:)))
         self.navigationItem.rightBarButtonItem?.isEnabled = false
 
         self.snapshotTrigger.delegate = self

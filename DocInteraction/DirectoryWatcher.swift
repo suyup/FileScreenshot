@@ -9,6 +9,7 @@
 import Foundation
 
 protocol DirectoryWatcherDelegate: class {
+
     func directoryDidChange(_ folderWatcher: DirectoryWatcher)
 }
 
@@ -22,7 +23,8 @@ class DirectoryWatcher {
         self.invalidate()
     }
 
-    class func watchFolderWithPath(_ watchPath: String, delegate watchDelegate: DirectoryWatcherDelegate) -> DirectoryWatcher? {
+    class func watchFolderWithPath(_ watchPath: String,
+                                   delegate watchDelegate: DirectoryWatcherDelegate) -> DirectoryWatcher? {
         let watcher = DirectoryWatcher()
         watcher.delegate = watchDelegate
         if watcher.startMonitoringDirectory(watchPath) {
@@ -51,7 +53,10 @@ class DirectoryWatcher {
         if dirKQRef == nil && dirFD == -1 {
             dirFD = open((dirPath as NSString).fileSystemRepresentation, O_EVTONLY)
             if dirFD >= 0 {
-                let dispatchSource = DispatchSource.makeFileSystemObjectSource(fileDescriptor: dirFD, eventMask: DispatchSource.FileSystemEvent.write, queue: DispatchQueue.main)
+                let dispatchSource =
+                    DispatchSource.makeFileSystemObjectSource(fileDescriptor: dirFD,
+                                                              eventMask: DispatchSource.FileSystemEvent.write,
+                                                              queue: DispatchQueue.main)
                 dispatchSource.setEventHandler { [weak self] in
                     self?.kqueueFired()
                 }

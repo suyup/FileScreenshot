@@ -19,6 +19,6 @@ extension FileManager {
     }
 
     var appGroupDir: String {
-        return self.containerURL(forSecurityApplicationGroupIdentifier: "app-group-id")?.path ?? ""
+        return self.containerURL(forSecurityApplicationGroupIdentifier: Bundle.main.appGroupID)?.path ?? ""
     }
 }
