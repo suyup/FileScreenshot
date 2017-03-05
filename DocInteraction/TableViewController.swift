@@ -26,14 +26,14 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let watcher = DirectoryWatcher.watchFolderWithPath(FileManager.default.applicationDocumentsDirectory, delegate: self) {
+        if let watcher = DirectoryWatcher.watchFolderWithPath(FileManager.default.documentDir, delegate: self) {
             self.dirWatcher = watcher
             self.directoryDidChange(self.dirWatcher)
         } else {
             fatalError("cannot initiate directory watcher")
         }
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(TableViewController.addPressed(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self,
+                                                                 action: #selector(TableViewController.addPressed(_:)))
     }
 
     // Mark:
@@ -77,7 +77,8 @@ class TableViewController: UITableViewController {
             cell.detailTextLabel?.text = "\(fileSizeStr) - \(uti)"
         }
 
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(TableViewController.handleLongPress(_:)))
+        let gesture = UILongPressGestureRecognizer(target: self,
+                                                   action: #selector(TableViewController.handleLongPress(_:)))
         cell.imageView?.addGestureRecognizer(gesture)
         cell.imageView?.isUserInteractionEnabled = true
 
@@ -98,7 +99,8 @@ class TableViewController: UITableViewController {
         self.navigationController?.pushViewController(controller, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView,
+                            editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if indexPath.section == 0 { return nil }
         let rowAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let url = self.fileURL(at: indexPath)
@@ -164,7 +166,7 @@ class TableViewController: UITableViewController {
     }
 
     fileprivate func addNewFile(name: String) {
-        let path = (FileManager.default.applicationDocumentsDirectory as NSString).appendingPathComponent("\(name).txt")
+        let path = (FileManager.default.documentDir as NSString).appendingPathComponent("\(name).txt")
         let data = "new file".data(using: .utf8)
         FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
     }
@@ -174,7 +176,7 @@ extension TableViewController: DirectoryWatcherDelegate {
 
     func directoryDidChange(_ folderWatcher: DirectoryWatcher) {
         self.documents.removeAll(keepingCapacity: true)
-        let docDirPath = FileManager.default.applicationDocumentsDirectory
+        let docDirPath = FileManager.default.documentDir
         let docDirContents = (try? FileManager.default.contentsOfDirectory(atPath: docDirPath)) ?? []
 
         for filename in docDirContents {

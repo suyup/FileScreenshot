@@ -7,43 +7,29 @@
 //
 
 import UIKit
-import QuartzCore
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, Snapshotable {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let snapshotTrigger = self.snapshotTrigger(action: #selector(AppDelegate.fire(_:)))
-        snapshotTrigger.delegate = self
-        self.window?.addGestureRecognizer(snapshotTrigger)
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         return true
     }
 
-    func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+    func application(_ application: UIApplication,
+                     viewControllerWithRestorationIdentifierPath identifierComponents: [Any],
+                     coder: NSCoder) -> UIViewController? {
         guard let name = identifierComponents.last as? String else { return nil }
         switch name {
         case "Preview": return PreviewController()
         default: return nil
         }
     }
+}
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-
-    var dic: UIDocumentInteractionController?
-
-    func fire(_ sender: UIGestureRecognizer) {
-        if sender.state == .began,
-            let vc = AppDelegate.topViewController() as? EditorController, let url = vc.view.snapshot() {
-            dic = UIDocumentInteractionController(url: url)
-            dic!.uti = "org.x.whiteboard"
-            let res = dic!.presentOpenInMenu(from: vc.view.frame, in: vc.view, animated: true)
-            precondition(res, "shoule be able to open in")
-        }
-    }
+extension AppDelegate {
 
     class func topViewController(on viewController: UIViewController? = nil) -> UIViewController? {
         var window: UIWindow?
@@ -74,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, Snapshotable {
         if let v = vc as? UINavigationController, let t = v.topViewController {
             vc = t
         }
-
+        
         return vc
     }
 }

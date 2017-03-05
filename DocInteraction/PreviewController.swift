@@ -9,7 +9,7 @@
 import Foundation
 import QuickLook
 
-class PreviewController: QLPreviewController, Snapshotable {
+class PreviewController: QLPreviewController {
 
     var url: URL!
 
@@ -36,32 +36,9 @@ class PreviewController: QLPreviewController, Snapshotable {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationItem.rightBarButtonItem?.action = #selector(PreviewController.tap(_:))
+        self.navigationItem.rightBarButtonItem = nil
         self.snapshotTrigger.delegate = self
         self.view.addGestureRecognizer(self.snapshotTrigger)
-    }
-
-    var snapshotTrigger: UIGestureRecognizer {
-        return self.snapshotTrigger(action: #selector(PreviewController.fire(_:)))
-    }
-
-    var dic: UIDocumentInteractionController?
-
-    func fire(_ sender: UIGestureRecognizer) {
-        if sender.state == .began, let view = sender.view, let url = view.snapshot() {
-            dic = UIDocumentInteractionController(url: url)
-            dic!.uti = "org.x.whiteboard"
-            let res = dic!.presentOpenInMenu(from: view.frame, in: view, animated: true)
-            precondition(res, "shoule be able to open in")
-        }
-    }
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-
-    func tap(_ sender: AnyObject) {
-        self.view.snapshot()
     }
 
     override func encodeRestorableState(with coder: NSCoder) {
