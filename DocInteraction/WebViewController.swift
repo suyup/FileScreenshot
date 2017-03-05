@@ -8,12 +8,9 @@
 
 import UIKit
 
-class WebViewController: UIViewController, UIScrollViewDelegate {
+class WebViewController: UIViewController, UIScrollViewDelegate, Snapshotable {
 
     var url: URL!
-
-    private var lastOffsetY: CGFloat = 0
-    private var hide: Bool = false
 
     convenience init(url: URL) {
         self.init()
@@ -28,28 +25,26 @@ class WebViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         (self.view as! UIWebView).loadRequest(URLRequest(url: self.url))
         (self.view as! UIWebView).scrollView.delegate = self
-        self.screenshotTrigger.delegate = self
-        self.view.addGestureRecognizer(self.screenshotTrigger)
+        self.snapshotTrigger.delegate = self
+        self.view.addGestureRecognizer(self.snapshotTrigger)
+    }
+
+    var snapshotTrigger: UIGestureRecognizer {
+        return self.snapshotTrigger(action: #selector(WebViewController.fire(_:)))
+    }
+
+    var dic: UIDocumentInteractionController?
+
+    func fire(_ sender: UIGestureRecognizer) {
+        if sender.state == .began, let view = sender.view, let url = view.snapshot() {
+            dic = UIDocumentInteractionController(url: url)
+            dic!.uti = "org.x.whiteboard"
+            let res = dic!.presentOpenInMenu(from: view.frame, in: view, animated: true)
+            precondition(res, "shoule be able to open in")
+        }
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
-    }
-
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.lastOffsetY = scrollView.contentOffset.y
-    }
-
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        self.hide = scrollView.contentOffset.y > self.lastOffsetY
-        self.navigationController?.setNavigationBarHidden(self.hide, animated: true)
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return self.hide
-    }
-
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .fade
     }
 }

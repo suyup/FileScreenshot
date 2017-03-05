@@ -122,7 +122,8 @@ class TableViewController: UITableViewController {
 
     fileprivate func setupDocInteractionController(url: URL) {
         if self.docInteractionController == nil {
-            self.docInteractionController = UIDocumentInteractionController(url: url)
+            let dic = UIDocumentInteractionController(url: url)
+            self.docInteractionController = dic
         } else {
             self.docInteractionController.url = url
         }

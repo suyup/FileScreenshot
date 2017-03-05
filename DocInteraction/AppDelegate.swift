@@ -10,14 +10,14 @@ import UIKit
 import QuartzCore
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, Screenshotable {
+class AppDelegate: UIResponder, UIApplicationDelegate, Snapshotable {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let screenshotTrigger = self.screenshotTrigger(action: #selector(AppDelegate.fire(_:)))
-        screenshotTrigger.delegate = self
-        self.window?.addGestureRecognizer(screenshotTrigger)
+        let snapshotTrigger = self.snapshotTrigger(action: #selector(AppDelegate.fire(_:)))
+        snapshotTrigger.delegate = self
+        self.window?.addGestureRecognizer(snapshotTrigger)
         return true
     }
 
@@ -33,9 +33,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, Screenshotable {
         return true
     }
 
+    var dic: UIDocumentInteractionController?
+
     func fire(_ sender: UIGestureRecognizer) {
-        if sender.state == .began, let vc = AppDelegate.topViewController() as? EditorController {
-            vc.view.screenshot()
+        if sender.state == .began,
+            let vc = AppDelegate.topViewController() as? EditorController, let url = vc.view.snapshot() {
+            dic = UIDocumentInteractionController(url: url)
+            dic!.uti = "org.x.whiteboard"
+            let res = dic!.presentOpenInMenu(from: vc.view.frame, in: vc.view, animated: true)
+            precondition(res, "shoule be able to open in")
         }
     }
 
